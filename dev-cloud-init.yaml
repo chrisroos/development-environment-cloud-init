@@ -12,6 +12,8 @@ users:
     groups: docker
 disable_root: true
 package_update: true
+package_upgrade: true
+package_reboot_if_required: true
 packages:
   # https://git-scm.com/download/linux
   - git
