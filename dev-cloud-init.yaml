@@ -188,3 +188,6 @@ runcmd:
   - # Add rbenv to bashrc
   - echo '' >> /home/${USER}/.bashrc
   - echo 'eval "$(rbenv init -)"' >> /home/${USER}/.bashrc
+  - # Add direnv to bashrc
+  - echo '' >> /home/${USER}/.bashrc
+  - echo 'eval "$(direnv hook bash)"' >> /home/${USER}/.bashrc
