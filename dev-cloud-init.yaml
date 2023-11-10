@@ -42,6 +42,8 @@ packages:
   - libgdbm-dev
   - libdb-dev
   - uuid-dev
+  # jq - https://jqlang.github.io/jq/
+  - jq
 apt:
   sources:
     tailscale.list:
