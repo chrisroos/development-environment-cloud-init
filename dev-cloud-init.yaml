@@ -185,3 +185,6 @@ runcmd:
   - sudo -u ${USER} bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash"
   - # Add github.com to known_hosts
   - sudo -u ${USER} bash -c "ssh-keyscan -H github.com >> ~/.ssh/known_hosts"
+  - # Add rbenv to bashrc
+  - echo '' >> /home/${USER}/.bashrc
+  - echo 'eval "$(rbenv init -)"' >> /home/${USER}/.bashrc
