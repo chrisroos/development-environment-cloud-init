@@ -177,11 +177,11 @@ runcmd:
   - # Install aws cli - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
-  - sudo ./aws/install
+  - ./aws/install
   - # Install docker-compose
   - curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
-  - sudo chmod +x /usr/local/bin/docker-compose
-  - sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
+  - chmod +x /usr/local/bin/docker-compose
+  - ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
   - # Install ruby-build - https://github.com/rbenv/ruby-build#clone-as-rbenv-plugin-using-git
   - sudo -u ${USER} bash -c "git clone https://github.com/rbenv/ruby-build.git /home/${USER}/.rbenv/plugins/ruby-build"
   - # Install nvm - https://github.com/nvm-sh/nvm
