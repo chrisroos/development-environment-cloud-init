@@ -49,6 +49,8 @@ packages:
   - postgresql-15
   - libpq-dev
   - postgresql-server-dev-15
+  # chromium and chromedriver - for rails system tests with selenium-webdriver
+  - chromium-chromedriver
 apt:
   sources:
     pgdg.list:
