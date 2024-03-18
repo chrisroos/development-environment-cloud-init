@@ -51,6 +51,8 @@ packages:
   - postgresql-server-dev-15
   # chromium and chromedriver - for rails system tests with selenium-webdriver
   - chromium-chromedriver
+  # Go for MailHog - https://github.com/mailhog/MailHog
+  - golang-go
 apt:
   sources:
     pgdg.list:
@@ -276,6 +278,8 @@ runcmd:
   - sudo -u ${USER} bash -c "git clone https://github.com/rbenv/ruby-build.git /home/${USER}/.rbenv/plugins/ruby-build"
   - # Install nvm - https://github.com/nvm-sh/nvm
   - sudo -u ${USER} bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash"
+  - # Install MailHog
+  - sudo -u ${USER} bash -c "go install github.com/mailhog/MailHog@latest"
   - # Create postgresql user
   - cd /tmp && sudo -u postgres createuser -s $USER
   - # Add github.com to known_hosts
@@ -286,3 +290,5 @@ runcmd:
   - # Add direnv to bashrc
   - echo '' >> /home/${USER}/.bashrc
   - echo 'eval "$(direnv hook bash)"' >> /home/${USER}/.bashrc
+  - # Add Go bin to PATH
+  - echo 'export PATH=$PATH:~/go/bin' >> /home/${USER}/.bashrc
