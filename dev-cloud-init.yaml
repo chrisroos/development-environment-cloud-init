@@ -53,6 +53,8 @@ packages:
   - chromium-chromedriver
   # Go for MailHog - https://github.com/mailhog/MailHog
   - golang-go
+  # libvips for Active Storage in Rails 7+ - https://www.libvips.org/install.html
+  - libvips
 apt:
   sources:
     pgdg.list:
