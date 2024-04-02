@@ -55,6 +55,8 @@ packages:
   - golang-go
   # libvips for Active Storage in Rails 7+ - https://www.libvips.org/install.html
   - libvips
+  # age for encrypting/decrupting secrets on the command line - https://github.com/FiloSottile/age
+  - age
 apt:
   sources:
     pgdg.list:
