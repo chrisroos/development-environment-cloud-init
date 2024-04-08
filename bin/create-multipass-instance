@@ -3,6 +3,6 @@
 multipass launch 22.04 \
   --cloud-init dev-cloud-init.yaml \
   --cpus 6 \
-  --disk 20G \
+  --disk 100G \
   --memory 8G \
   --name dev
