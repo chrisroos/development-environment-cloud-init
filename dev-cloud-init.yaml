@@ -286,6 +286,12 @@ runcmd:
   - sudo -u ${USER} bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash"
   - # Install MailHog
   - sudo -u ${USER} bash -c "go install github.com/mailhog/MailHog@latest"
+  - # Install GitUI - https://github.com/extrawurst/gitui
+  - cd /tmp
+  - wget https://github.com/extrawurst/gitui/releases/download/v0.25.2/gitui-linux-musl.tar.gz
+  - tar -xzf gitui-linux-musl.tar.gz
+  - mv gitui /usr/local/bin/
+  - rm gitui-linux-musl.tar.gz
   - # Create postgresql user
   - cd /tmp && sudo -u postgres createuser -s $USER
   - # Add github.com to known_hosts
