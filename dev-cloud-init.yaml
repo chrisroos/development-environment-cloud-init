@@ -292,6 +292,10 @@ runcmd:
   - tar -xzf gitui-linux-musl.tar.gz
   - mv gitui /usr/local/bin/
   - rm gitui-linux-musl.tar.gz
+  # Install asdf - https://asdf-vm.com/guide/getting-started.html
+  - sudo -u ${USER} bash -c "git clone https://github.com/asdf-vm/asdf.git /home/${USER}/.asdf --branch v0.14.0"
+  - echo 'source "$HOME/.asdf/asdf.sh"' >> /home/${USER}/.bashrc
+  - echo 'source "$HOME/.asdf/completions/asdf.bash"' >> /home/${USER}/.bashrc
   # Create postgresql user
   - cd /tmp && sudo -u postgres createuser -s $USER
   # Add github.com to known_hosts
