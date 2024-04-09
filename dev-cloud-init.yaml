@@ -265,42 +265,42 @@ apt:
         -----END PGP PUBLIC KEY BLOCK-----
 runcmd:
   - export USER=chrisroos
-  - # Configure firewall
+  # Configure firewall
   - ufw allow OpenSSH
   - ufw allow 3000 # Rails server default port
   - ufw allow 8025 # MailHog web server default port
   - ufw enable
-  - # Install aws cli - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+  # Install aws cli - https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
   - ./aws/install
-  - # Install heroku cli -https://devcenter.heroku.com/articles/heroku-cli#standalone-installation-with-a-tarball
+  # Install heroku cli -https://devcenter.heroku.com/articles/heroku-cli#standalone-installation-with-a-tarball
   - curl https://cli-assets.heroku.com/install.sh | sh
-  - # Install docker-compose
+  # Install docker-compose
   - curl -SL https://github.com/docker/compose/releases/download/v2.16.0/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
   - chmod +x /usr/local/bin/docker-compose
   - ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
-  - # Install ruby-build - https://github.com/rbenv/ruby-build#clone-as-rbenv-plugin-using-git
+  # Install ruby-build - https://github.com/rbenv/ruby-build#clone-as-rbenv-plugin-using-git
   - sudo -u ${USER} bash -c "git clone https://github.com/rbenv/ruby-build.git /home/${USER}/.rbenv/plugins/ruby-build"
-  - # Install nvm - https://github.com/nvm-sh/nvm
+  # Install nvm - https://github.com/nvm-sh/nvm
   - sudo -u ${USER} bash -c "curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash"
-  - # Install MailHog
+  # Install MailHog
   - sudo -u ${USER} bash -c "go install github.com/mailhog/MailHog@latest"
-  - # Install GitUI - https://github.com/extrawurst/gitui
+  # Install GitUI - https://github.com/extrawurst/gitui
   - cd /tmp
   - wget https://github.com/extrawurst/gitui/releases/download/v0.25.2/gitui-linux-musl.tar.gz
   - tar -xzf gitui-linux-musl.tar.gz
   - mv gitui /usr/local/bin/
   - rm gitui-linux-musl.tar.gz
-  - # Create postgresql user
+  # Create postgresql user
   - cd /tmp && sudo -u postgres createuser -s $USER
-  - # Add github.com to known_hosts
+  # Add github.com to known_hosts
   - sudo -u ${USER} bash -c "ssh-keyscan -H github.com >> ~/.ssh/known_hosts"
-  - # Add rbenv to bashrc
+  # Add rbenv to bashrc
   - echo '' >> /home/${USER}/.bashrc
   - echo 'eval "$(rbenv init -)"' >> /home/${USER}/.bashrc
-  - # Add direnv to bashrc
+  # Add direnv to bashrc
   - echo '' >> /home/${USER}/.bashrc
   - echo 'eval "$(direnv hook bash)"' >> /home/${USER}/.bashrc
-  - # Add Go bin to PATH
+  # Add Go bin to PATH
   - echo 'export PATH=$PATH:~/go/bin' >> /home/${USER}/.bashrc
