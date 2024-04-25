@@ -59,6 +59,8 @@ packages:
   - age
   # ripgrep (rg) - https://github.com/BurntSushi/ripgrep
   - ripgrep
+  # nginx
+  - nginx
 apt:
   sources:
     pgdg.list:
