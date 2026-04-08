@@ -5,4 +5,4 @@ multipass launch 24.04 \
   --cpus 6 \
   --disk 100G \
   --memory 8G \
-  --name "${NAME:-dev}"
+  --name "${NAME:-nhs-dev}"
