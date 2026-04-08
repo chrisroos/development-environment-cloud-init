@@ -1,8 +1,8 @@
 #! /bin/bash
 
-multipass launch 22.04 \
+multipass launch 24.04 \
   --cloud-init nhs-cloud-init.yaml \
   --cpus 6 \
   --disk 100G \
   --memory 8G \
-  --name "${NAME:-dev}"
+  --name "${NAME:-nhs-dev}"
