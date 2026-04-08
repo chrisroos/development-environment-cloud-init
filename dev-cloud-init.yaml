@@ -56,6 +56,9 @@ packages:
   - ripgrep
   # nginx
   - nginx
+  # dependencies for building https://github.com/mise-plugins/vfox-postgres
+  - bison
+  - flex
 apt:
   sources:
     pgdg.list:
@@ -215,6 +218,11 @@ runcmd:
   - sudo -u ${USER} bash -c "git clone https://github.com/asdf-vm/asdf.git /home/${USER}/.asdf --branch v0.14.0"
   - echo 'source "$HOME/.asdf/asdf.sh"' >> /home/${USER}/.bashrc
   - echo 'source "$HOME/.asdf/completions/asdf.bash"' >> /home/${USER}/.bashrc
+  # Install mise - https://mise.jdx.dev/installing-mise.html
+  - sudo -u ${USER} bash -c "curl https://mise.run | sh"
+  - echo 'eval "$(/home/chrisroos/.local/bin/mise activate bash)"' >> /home/${USER}/.bashrc
+  # Install uv
+  - curl -LsSf https://astral.sh/uv/install.sh | sh
   # Add github.com to known_hosts
   - sudo -u ${USER} bash -c "ssh-keyscan -H github.com >> ~/.ssh/known_hosts"
   # Add rbenv to bashrc
