@@ -1,6 +1,6 @@
 #! /bin/bash
 
-multipass launch 22.04 \
+multipass launch 24.04 \
   --cloud-init dev-cloud-init.yaml \
   --cpus 6 \
   --disk 100G \
