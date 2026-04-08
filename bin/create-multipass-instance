@@ -5,4 +5,4 @@ multipass launch 22.04 \
   --cpus 6 \
   --disk 100G \
   --memory 8G \
-  --name dev
+  --name "${NAME:-dev}"
