@@ -21,10 +21,40 @@ echo "$(multipass info nhs-dev | grep IPv4 | cut -c17-) nhs-dev" | sudo tee -a /
 ssh-keygen -f '/home/chrisroos/.ssh/known_hosts' -R 'nhs-dev'
 
 # Add the following to ~/.ssh/config
-# The LocalForward config means that connecting to localhost:4000 will make requests to the Rails app in the multipass instance
+# LocalForward 4000 means that connecting to localhost:4000 will make requests to the Mavis Rails app in the multipass instance
+# LocalForward 4001 means that connecting to localhost:4000 will make requests to the Mavis Reporting Python app in the multipass instance
 Host nhs-dev
   ForwardAgent yes
   LocalForward 4000 localhost:4000
+  LocalForward 4001 localhost:4001
+```
+
+### Setup AWS CLI
+
+From https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-token-auto-sso.
+
+```
+# Install AWS CLI SessionManager - https://docs.aws.amazon.com/systems-manager/latest/userguide/install-plugin-debian-and-ubuntu.html
+curl "https://s3.amazonaws.com/session-manager-downloads/plugin/latest/ubuntu_64bit/session-manager-plugin.deb" -o "session-manager-plugin.deb"
+sudo dpkg -i session-manager-plugin.deb
+
+# Configure AWS CLI using SSO - https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-token-auto-sso
+aws configure sso
+# SSO session name: nhs
+# SSO start URL: <from NHS AWS SSO item in 1Password>
+# SSO region: <from NHS AWS SSO item in 1Password>
+# SSO registration scopes: <accept default of sso:account:access>
+
+# Open the URL in the browser I'm signed in to AWS
+# It'll redirect to localhost on a random port.
+# Copy this URL and use curl to request it in the dev VM to complete the OAuth flow
+curl "<oauth-callback-url>"
+
+# You'll be asked a few more questions
+# Name the profile as 'default' so that it's used by default
+
+# Test that I can connect
+bin/mavis-server shell test
 ```
 
 ### Setup Mavis
@@ -71,15 +101,23 @@ cp .env.generic .env
 uv run playwright install --with-deps
 
 # Run smoke tests against qa
-cd ~/manage-vaccinations-in-schools-testing
 uv run pytest -m smoke
 
 # Download and import gias data in mavis to run tests against local Rails app
 cd ~/manage-vaccinations-in-schools
 bin/mavis gias download
+RAILS_ENV=end_to_end bin/rails db:setup
 RAILS_ENV=end_to_end bin/mavis gias import
 
 # Run smoke tests against local Rails app
-cd ~/manage-vaccinations-in-schools
 bin/e2e -m smoke
+```
+
+### Setup Mavis reporting
+
+```
+git clone git@github.com:NHSDigital/manage-vaccinations-in-schools-reporting.git
+cd manage-vaccinations-in-schools-reporting/
+mise trust
+mise install
 ```
