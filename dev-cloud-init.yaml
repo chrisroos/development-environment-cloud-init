@@ -61,6 +61,8 @@ packages:
   - ripgrep
   # nginx
   - nginx
+  # universal-ctags - https://github.com/universal-ctags/ctags
+  - universal-ctags
 apt:
   sources:
     pgdg.list:
