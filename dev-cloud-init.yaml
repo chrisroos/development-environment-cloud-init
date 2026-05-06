@@ -312,3 +312,7 @@ runcmd:
   - echo 'eval "$(direnv hook bash)"' >> /home/${USER}/.bashrc
   # Add Go bin to PATH
   - echo 'export PATH=$PATH:~/go/bin' >> /home/${USER}/.bashrc
+  # Download git bash completion
+  - sudo -u ${USER} bash -c "curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash"
+  - echo '' >> /home/${USER}/.bashrc
+  - echo 'source ~/.git-completion.bash' >> /home/${USER}/.bashrc
