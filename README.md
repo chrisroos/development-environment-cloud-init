@@ -57,9 +57,6 @@ cd ~/manage-vaccinations-in-schools-testing
 # Install mise dependencies
 mise install
 
-# Install uv
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
 # Update project environment
 uv sync
 

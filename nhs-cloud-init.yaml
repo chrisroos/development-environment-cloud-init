@@ -252,3 +252,5 @@ runcmd:
   - sudo -u ${USER} bash -c "curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash"
   - echo '' >> /home/${USER}/.bashrc
   - echo 'source ~/.git-completion.bash' >> /home/${USER}/.bashrc
+  # Install uv for mavis-testing repo
+  - sudo -u ${USER} bash -c "curl -LsSf https://astral.sh/uv/install.sh | sh"
