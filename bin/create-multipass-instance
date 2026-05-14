@@ -2,7 +2,7 @@
 
 multipass launch 22.04 \
   --cloud-init dev-cloud-init.yaml \
-  --cpus 6 \
+  --cpus ${CPU:-6} \
   --disk 100G \
-  --memory 8G \
+  --memory ${MEM:-8}G \
   --name "${NAME:-dev}"
