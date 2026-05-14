@@ -1,8 +1,15 @@
 #! /bin/bash
 
+name="${NAME:-nhs-dev}"
+
 multipass launch 24.04 \
   --cloud-init nhs-cloud-init.yaml \
   --cpus ${CPU:-6} \
   --disk 100G \
   --memory ${MEM:-8}G \
-  --name "${NAME:-nhs-dev}"
+  --name "${name}"
+
+multipass mount \
+  --uid-map 1000:1000 \
+  --gid-map 1000:1001  \
+  . ${name}:/home/chrisroos/cloud-init
