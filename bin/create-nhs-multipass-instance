@@ -7,7 +7,8 @@ multipass launch 24.04 \
   --cpus ${CPU:-6} \
   --disk 100G \
   --memory ${MEM:-8}G \
-  --name "${name}"
+  --name "${name}" \
+  --timeout 900
 
 multipass mount \
   --uid-map 1000:1000 \
