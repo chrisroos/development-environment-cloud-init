@@ -28,10 +28,12 @@ echo "$(multipass info nhs-dev | grep IPv4 | cut -c17-) nhs-dev" | sudo tee -a /
 ssh-keygen -f '/home/chrisroos/.ssh/known_hosts' -R 'nhs-dev'
 
 # Add the following to ~/.ssh/config
-# The LocalForward config means that connecting to localhost:4000 will make requests to the Rails app in the multipass instance
+# LocalForward 4000 means that connecting to localhost:4000 will make requests to the Mavis Rails app in the multipass instance
+# LocalForward 4001 means that connecting to localhost:4000 will make requests to the Mavis Reporting Python app in the multipass instance
 Host nhs-dev
   ForwardAgent yes
   LocalForward 4000 localhost:4000
+  LocalForward 4001 localhost:4001
 ```
 
 ### Setup Mavis
@@ -86,4 +88,13 @@ RAILS_ENV=end_to_end bin/mavis gias import
 # Run smoke tests against local Rails app
 cd ~/manage-vaccinations-in-schools
 bin/e2e -m smoke
+```
+
+### Setup Mavis reporting
+
+```
+git clone git@github.com:NHSDigital/manage-vaccinations-in-schools-reporting.git
+cd manage-vaccinations-in-schools-reporting/
+mise trust
+mise install
 ```
