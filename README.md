@@ -36,6 +36,30 @@ Host nhs-dev
   LocalForward 4001 localhost:4001
 ```
 
+### Setup AWS CLI
+
+From https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-token-auto-sso.
+
+```
+# Configure AWS CLI using SSO - https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-sso.html#sso-configure-profile-token-auto-sso
+aws configure sso
+# SSO session name: nhs
+# SSO start URL: <from NHS AWS SSO item in 1Password>
+# SSO region: <from NHS AWS SSO item in 1Password>
+# SSO registration scopes: <accept default of sso:account:access>
+
+# Open the URL in the browser I'm signed in to AWS
+# It'll redirect to localhost on a random port.
+# Copy this URL and use curl to request it in the dev VM to complete the OAuth flow
+curl "<oauth-callback-url>"
+
+# You'll be asked a few more questions
+# Name the profile as 'default' so that it's used by default
+
+# Test that I can connect
+bin/mavis-server shell test
+```
+
 ### Setup Mavis
 
 ```
