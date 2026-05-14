@@ -6,6 +6,13 @@ Create a multipass instance:
 ./bin/create-multipass-instance
 ```
 
+Use the following to tail the cloud-init log output while the vm is being provisioned.
+
+```
+ssh <ip> sudo tail -f /var/log/cloud-init.log
+ssh <ip> sudo tail -f /var/log/cloud-init-output.log
+```
+
 ---
 
 ## NHS Dev
