@@ -101,16 +101,15 @@ cp .env.generic .env
 uv run playwright install --with-deps
 
 # Run smoke tests against qa
-cd ~/manage-vaccinations-in-schools-testing
 uv run pytest -m smoke
 
 # Download and import gias data in mavis to run tests against local Rails app
 cd ~/manage-vaccinations-in-schools
 bin/mavis gias download
+RAILS_ENV=end_to_end bin/rails db:setup
 RAILS_ENV=end_to_end bin/mavis gias import
 
 # Run smoke tests against local Rails app
-cd ~/manage-vaccinations-in-schools
 bin/e2e -m smoke
 ```
 
