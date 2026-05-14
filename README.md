@@ -60,64 +60,29 @@ curl "<oauth-callback-url>"
 bin/mavis-server shell test
 ```
 
-### Setup Mavis
+### Setup the apps
+
+```
+ssh nhs-dev
+cd ~/cloud-init
+./setup-mavis.sh
+```
+
+
+### Mavis testing
 
 ```
 ssh nhs-dev
 
-cd ~
-git clone git@github.com:NHSDigital/manage-vaccinations-in-schools
-
-cd ~/manage-vaccinations-in-schools
-git checkout next
-
-# Install dependencies
-mise install
-
-# Setup the app
-bin/setup
-```
-
-### Setup Mavis testing
-
-```
-ssh nhs-dev
-
-cd ~
-git clone git@github.com:NHSDigital/manage-vaccinations-in-schools-testing
 cd ~/manage-vaccinations-in-schools-testing
 
-# Install mise dependencies
-mise install
-
-# Update project environment
-uv sync
-
 # Configure .env
-cp .env.generic .env
 # Set http basic auth and password for qa.mavistesting.com
-
-# Install playwright browsers with all required dependencies
-uv run playwright install --with-deps
 
 # Run smoke tests against qa
 uv run pytest -m smoke
 
-# Download and import gias data in mavis to run tests against local Rails app
-cd ~/manage-vaccinations-in-schools
-bin/mavis gias download
-RAILS_ENV=end_to_end bin/rails db:setup
-RAILS_ENV=end_to_end bin/mavis gias import
-
 # Run smoke tests against local Rails app
+cd ~/manage-vaccinations-in-schools
 bin/e2e -m smoke
-```
-
-### Setup Mavis reporting
-
-```
-git clone git@github.com:NHSDigital/manage-vaccinations-in-schools-reporting.git
-cd manage-vaccinations-in-schools-reporting/
-mise trust
-mise install
 ```
